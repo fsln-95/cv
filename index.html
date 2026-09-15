@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fabricio S. Lozano Negro — Physicist</title>
+<meta name="description" content="Fabricio S. Lozano Negro — physicist working on quantum dynamics, decoherence, and complex systems. Full CV and publications.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F6F5F1;
+    --panel: #F1EFE9;
+    --ink: #1C1D1F;
+    --muted: #6F6B63;
+    --faint: #948F84;
+    --accent: #355C5C;
+    --accent-soft: #E4E9E8;
+    --rule: #DAD6CC;
+    --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --maxw: 760px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover{ border-bottom-color: currentColor; }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .layout{
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: 100vh;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar{
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    padding: 3rem 2.25rem;
+    background: var(--panel);
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar h1{
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 1.7rem;
+    line-height: 1.2;
+    margin: 0 0 0.35rem;
+  }
+
+  .sidebar .role{
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin: 0 0 1.75rem;
+  }
+
+  .wave{
+    width: 100%;
+    height: 64px;
+    margin-bottom: 1.75rem;
+  }
+  .wave path{
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: draw 1.8s ease-out forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce){
+    .wave path{ animation: none; stroke-dashoffset: 0; }
+  }
+
+  .contact{
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .contact div{ margin-bottom: 0.3rem; }
+  .contact a{ color: var(--muted); }
+
+  nav.toc{
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    font-size: 0.92rem;
+    margin-bottom: auto;
+  }
+  nav.toc a{
+    color: var(--faint);
+    border-bottom: none;
+    transition: color .15s ease;
+  }
+  nav.toc a:hover{ color: var(--ink); }
+  nav.toc a.active{ color: var(--accent); font-weight: 500; }
+
+  .sidebar .cv-link{
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.88rem;
+  }
+
+  /* ---------- Content ---------- */
+  main{
+    padding: 4rem 2.5rem 6rem;
+    max-width: calc(var(--maxw) + 2.5rem * 2);
+  }
+
+  section{ max-width: var(--maxw); margin-bottom: 3.75rem; scroll-margin-top: 2rem; }
+
+  h2.section-title{
+    font-family: var(--serif);
+    font-variant: small-caps;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin: 0 0 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .profile p{ font-size: 1.03rem; margin: 0 0 1rem; max-width: 62ch; }
+
+  /* Timeline / experience */
+  .entry{ margin-bottom: 1.75rem; }
+  .entry:last-child{ margin-bottom: 0; }
+  .entry-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .entry-title{ font-weight: 600; font-size: 1.02rem; }
+  .entry-org{ font-style: italic; color: var(--muted); font-size: 0.95rem; }
+  .entry-date{
+    font-size: 0.85rem;
+    color: var(--faint);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .entry ul{ margin: 0.5rem 0 0; padding-left: 1.1rem; }
+  .entry li{ margin-bottom: 0.3rem; font-size: 0.96rem; }
+  .entry li:last-child{ margin-bottom: 0; }
+  .entry .sub{ color: var(--muted); font-size: 0.94rem; margin-top: 0.35rem; }
+
+  /* Education */
+  .edu-entry{ display: grid; grid-template-columns: 90px 1fr; gap: 1rem; margin-bottom: 1.4rem; }
+  .edu-entry:last-child{ margin-bottom: 0; }
+  .edu-date{ font-size: 0.85rem; color: var(--faint); padding-top: 0.15rem; font-variant-numeric: tabular-nums;}
+  .edu-body strong{ font-weight: 600; }
+  .edu-body .school{ color: var(--muted); }
+  .edu-body .detail{ font-size: 0.92rem; color: var(--muted); margin-top: 0.25rem; }
+
+  /* Publications */
+  .pub-year{
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--accent);
+    margin: 1.5rem 0 0.6rem;
+    font-weight: 600;
+  }
+  .pub-year:first-child{ margin-top: 0; }
+  .pub{ margin-bottom: 0.9rem; font-size: 0.97rem; padding-left: 1rem; border-left: 2px solid var(--accent-soft); }
+  .pub .pub-title{ color: var(--ink); }
+  .pub .pub-meta{ display: block; color: var(--muted); font-size: 0.88rem; margin-top: 0.15rem; }
+
+  /* Dense list (talks, courses) */
+  .list-row{
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.93rem;
+  }
+  .list-row:last-child{ border-bottom: none; }
+  .list-row .yr{ color: var(--faint); font-variant-numeric: tabular-nums; }
+  .list-row .kind{ color: var(--muted); font-style: italic; }
+  .list-row .loc{ color: var(--muted); }
+
+  .subgroup-label{
+    font-size: 0.82rem;
+    color: var(--faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 1.5rem 0 0.25rem;
+  }
+  .subgroup-label:first-child{ margin-top: 0; }
+
+  details.courses{ margin-top: 0.5rem; }
+  details.courses summary{
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 0.92rem;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  details.courses summary::-webkit-details-marker{ display:none; }
+  details.courses summary::before{
+    content: '+';
+    display:inline-block; width:1em;
+  }
+  details.courses[open] summary::before{ content: '\2212'; }
+  .course-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 1.5rem;
+    margin-top: 0.9rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .course-grid span.yr{ color: var(--faint); margin-right: 0.4rem; }
+
+  .awards .list-row{ grid-template-columns: 64px 1fr; }
+
+  footer{
+    max-width: var(--maxw);
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  /* ---------- Mobile nav ---------- */
+  .mobile-bar{ display: none; }
+
+  @media (max-width: 900px){
+    .layout{ display: block; }
+    .sidebar{
+      position: relative;
+      height: auto;
+      top: 0;
+      padding: 2.25rem 1.5rem 1.5rem;
+      border-right: none;
+      border-bottom: 1px solid var(--rule);
+    }
+    nav.toc{
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.4rem 1rem;
+      margin-bottom: 0;
+    }
+    .wave{ height: 44px; }
+    main{ padding: 2.5rem 1.5rem 4rem; }
+    .edu-entry{ grid-template-columns: 70px 1fr; }
+    .course-grid{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h1>Fabricio S.<br>Lozano Negro</h1>
+    <p class="role">Physicist — quantum dynamics &amp; complex systems</p>
+
+    <svg class="wave" viewBox="0 0 260 64" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,32 C10,10 20,54 30,32 C38,15 44,49 50,32 C56,18 61,46 66,32 C71,20 75,44 80,32 C84,22 88,42 92,32 C96,24 99,40 103,32 C107,25 110,39 114,32 C117,26 120,38 124,32 C129,26 133,38 137,32 C142,27 146,37 151,32 C157,28 160,36 166,32 C173,28 177,36 184,32 C192,29 196,35 204,32 C213,29 218,35 227,32 C236,30 241,34 250,32 C255,31 258,33 260,32"/>
+    </svg>
+
+    <div class="contact">
+      <div>Cordoba, Argentina</div>
+      <div><a href="mailto:fabricio.s.lozano@gmail.com">fabricio.s.lozano@gmail.com</a></div>
+    </div>
+
+    <nav class="toc" id="toc">
+      <a href="#profile">Profile</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#publications">Publications</a>
+      <a href="#talks">Talks &amp; Presentations</a>
+      <a href="#awards">Awards</a>
+    </nav>
+
+    <div class="cv-link">
+      <a href="cv-eng.pdf">Download full CV (PDF) ↓</a>
+    </div>
+  </aside>
+
+  <main>
+
+    <section id="profile">
+      <h2 class="section-title">Profile</h2>
+      <div class="profile">
+        <p>I'm a physicist working on the theory and numerical simulation of quantum dynamics in complex, disordered systems — decoherence, transport, and information scrambling, mostly probed through Nuclear Magnetic Resonance. My work is primarily computational: large-scale numerical simulations run on HPC clusters, paired with analytical models that guide and interpret experiments carried out by collaborators.</p>
+        <p>I did my undergraduate and Master's training at Instituto Balseiro, whose lab-intensive curriculum in electronics and instrumentation still shapes how I think about measurement. I'm currently a postdoctoral researcher at the University of Florence, contributing modeling and simulation work to APACE, an EU-funded, multi-site collaboration spanning academic and industry partners across Europe.</p>
+      </div>
+    </section>
+
+    <section id="experience">
+      <h2 class="section-title">Experience</h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-title">Postdoctoral Researcher</span>
+          <span class="entry-date">2024 – Present</span>
+        </div>
+        <div class="entry-org">University of Florence, Italy — Project <a href="https://sites.google.com/unifi.it/apace-biolaser/home" target="_blank" rel="noopener">APACE</a></div>
+        <ul>
+          <li>Develop theoretical models and numerical simulations supporting the design and interpretation of sensor and biophotonics experiments within a multi-partner European project.</li>
+          <li>Collaborate directly with experimentalists across the UK, Poland and Germany; report progress at biannual project-wide meetings.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-title">PhD Researcher</span>
+          <span class="entry-date">2019 – 2024</span>
+        </div>
+        <div class="entry-org">Instituto de Física Enrique Gaviola (CONICET) / Universidad Nacional de Córdoba, Argentina</div>
+        <ul>
+          <li>Built large-scale numerical simulations, run on HPC clusters, modeling decoherence and transport in complex spin systems.</li>
+          <li>Developed theoretical models that guided the design and interpretation of NMR experiments run by experimental collaborators, supporting the analysis behind 4 peer-reviewed publications.</li>
+          <li>Presented results at 15+ national and international conferences and invited seminars across the USA, Italy, Chile, Germany and Argentina.</li>
+        </ul>
+        <div class="sub">Advisors: Dr. Horacio M. Pastawski, Dr. Gonzalo A. Álvarez</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <span class="entry-title">Assistant Professor (Teaching)</span>
+          <span class="entry-date">2020 – 2025</span>
+        </div>
+        <div class="entry-org">Universidad Nacional de Córdoba &amp; Universidad Favaloro, Argentina</div>
+        <ul>
+          <li>Physics IV — Universidad Favaloro (2021–2025)</li>
+          <li>Algebra I — Universidad Nacional de Córdoba (2023)</li>
+          <li>Discrete Mathematics I — Universidad Nacional de Córdoba (2024)</li>
+          <li>Physics I — Universidad Nacional de Córdoba (2020)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="education">
+      <h2 class="section-title">Education</h2>
+
+      <div class="edu-entry">
+        <div class="edu-date">2019–2024</div>
+        <div class="edu-body">
+          <strong>PhD in Physics</strong><br>
+          <span class="school">Instituto de Física Enrique Gaviola — Universidad Nacional de Córdoba, Argentina</span>
+          <div class="detail">Thesis: Loschmidt echoes in the study of quantum dynamics and decoherence in charge and spin excitations in complex systems, observed by Nuclear Magnetic Resonance.</div>
+        </div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="edu-date">2017–2018</div>
+        <div class="edu-body">
+          <strong>Master's Degree in Physics</strong><br>
+          <span class="school">Instituto Balseiro — Universidad Nacional de Cuyo, Bariloche, Argentina</span>
+          <div class="detail">Overall score: 9/10. Thesis: monitoring many-spin dynamics with time-reversal echoes by NMR.</div>
+        </div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="edu-date">2015–2017</div>
+        <div class="edu-body">
+          <strong>Licenciatura en Física</strong> <span class="school">(BSc equivalent)</span><br>
+          <span class="school">Instituto Balseiro — Universidad Nacional de Cuyo, Bariloche, Argentina</span>
+          <div class="detail">Overall score: 9.16/10 — top of class. Lab-intensive curriculum: electronics, instrumentation, experimental physics.</div>
+        </div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="edu-date">2013–2015</div>
+        <div class="edu-body">
+          <strong>Licenciatura en Física</strong> <span class="school">(first two years)</span><br>
+          <span class="school">Facultad de Ciencias Exactas, Ingeniería y Agrimensura — Universidad Nacional de Rosario, Argentina</span>
+          <div class="detail">Overall score: 9.46/10.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="publications">
+      <h2 class="section-title">Publications</h2>
+
+      <div class="pub-year">2024</div>
+      <div class="pub">
+        <a class="pub-title" href="https://doi.org/10.1103/PhysRevA.110.042410" target="_blank" rel="noopener">Global Out of Time Order Correlators as a Signature of Scrambling Dynamics of Local Observables</a>
+        <span class="pub-meta">Lozano-Negro F.S., Sánchez C.M., Chattah A.K., Álvarez G.A., Pastawski H.M. — Phys. Rev. A 110, 042410</span>
+      </div>
+      <div class="pub">
+        <a class="pub-title" href="https://doi.org/10.1103/PhysRevA.109.042213" target="_blank" rel="noopener">Universal stability of coherently diffusive 1D systems with respect to decoherence</a>
+        <span class="pub-meta">Lozano-Negro F.S., Alvarez Navarro E., Chávez Calderón N., Mattiotti F., Borgonovi F., Pastawski H.M., Celardo G.L. — Phys. Rev. A 109, 042213</span>
+      </div>
+
+      <div class="pub-year">2022</div>
+      <div class="pub">
+        <a class="pub-title" href="https://doi.org/10.1088/1361-648X/ac57d6" target="_blank" rel="noopener">Simulating a catalyst induced quantum dynamical phase transition of a Heyrovsky reaction with different models for the environment</a>
+        <span class="pub-meta">Lozano-Negro F.S., Ferreyra-Ortega M.A., Bendersky D., Fernández-Alcázar L., Pastawski H.M. — J. Phys.: Condens. Matter 34, 214006</span>
+      </div>
+
+      <div class="pub-year">2021</div>
+      <div class="pub">
+        <a class="pub-title" href="https://doi.org/10.1016/j.chaos.2021.111175" target="_blank" rel="noopener">Ergodicity breaking in an incommensurate system observed by OTOCs and Loschmidt Echoes: From quantum diffusion to sub-diffusion</a>
+        <span class="pub-meta">Lozano-Negro F.S., Zangara P., Pastawski H.M. — Chaos, Solitons &amp; Fractals 150, 111175</span>
+      </div>
+    </section>
+
+    <section id="talks">
+      <h2 class="section-title">Talks &amp; Presentations</h2>
+
+      <div class="subgroup-label">Invited Seminars</div>
+      <div class="list-row"><div class="yr">2023</div><div>Universal stability of coherently diffusive 1D systems with respect to decoherence. <span class="kind">Invited seminar</span> — MIT, Boston, USA.</div></div>
+      <div class="list-row"><div class="yr">2023</div><div>Universal stability of coherently diffusive 1D systems with respect to decoherence. <span class="kind">Invited seminar</span> — Università Cattolica del Sacro Cuore, Brescia, Italy.</div></div>
+      <div class="list-row"><div class="yr">2023</div><div>Monitoreo cuántico en células vivas: detectando radicales libres. <span class="kind">Physics seminar</span> — FaMAF, Córdoba, Argentina.</div></div>
+
+      <div class="subgroup-label">Conference Talks &amp; Posters</div>
+      <div class="list-row"><div class="yr">2026</div><div>APACE Biannual Spring Meeting 2026 — <span class="loc">Heriot-Watt University, Edinburgh, UK.</span></div></div>
+      <div class="list-row"><div class="yr">2025</div><div>APACE Biannual Autumn Meeting 2025 — <span class="loc">ICHO PAN, Warsaw, Poland.</span></div></div>
+      <div class="list-row"><div class="yr">2025</div><div>APACE Biannual Spring Meeting 2025 — <span class="loc">Max Planck Institute for the Science of Light, Erlangen, Germany.</span></div></div>
+      <div class="list-row"><div class="yr">2024</div><div>Global OTOCs as a signature of scrambling of local observables. <span class="kind">Talk &amp; poster</span> — 109th AFA Meeting + CUANTOS 6, San Luis, Argentina.</div></div>
+      <div class="list-row"><div class="yr">2024</div><div>104th IUVSTA Workshop: Current trends in low-dimensional materials — <span class="loc">San Luis, Argentina.</span></div></div>
+      <div class="list-row"><div class="yr">2024</div><div>Universal stability of coherently diffusive 1D systems with respect to decoherence. <span class="kind">Talk</span> — San Luis, Argentina.</div></div>
+      <div class="list-row"><div class="yr">2023</div><div>Universal robustness to decoherence in the quantum diffusive regime. <span class="kind">Poster</span> — ICTP smr 3867, Trieste, Italy.</div></div>
+      <div class="list-row"><div class="yr">2023</div><div>Decoherence-independent transport in the Harper-Hofstadter-Aubry-André model at criticality. <span class="kind">Poster</span> — ICTP smr 3820, Santiago de Chile, Chile.</div></div>
+      <div class="list-row"><div class="yr">2023</div><div>Dephasing independent transport in the diffusive coherent regime around criticality. <span class="kind">Poster</span> — CUANTOS 5, FaMAF, Córdoba, Argentina.</div></div>
+      <div class="list-row"><div class="yr">2022</div><div>Ergodicity breaking in an incommensurate system observed by OTOCs and Loschmidt Echoes. <span class="kind">Poster</span> — 107º RAFA, Bariloche, Argentina.</div></div>
+      <div class="list-row"><div class="yr">2021</div><div>Ergodicity breaking in an incommensurate system observed by OTOCs and Loschmidt Echoes. <span class="kind">Poster</span> — PROTOC21, Max Planck Institute, Dresden, Germany.</div></div>
+      <div class="list-row"><div class="yr">2019</div><div>Linking localization effects on the dynamic behavior of many-spin systems with quantum irreversibility. <span class="kind">Poster</span> — Giambiagi Winter School, Buenos Aires, Argentina.</div></div>
+      <div class="list-row"><div class="yr">2018</div><div>Relacionando efectos de localización en el comportamiento dinámico de muchos espines con irreversibilidad cuántica. <span class="kind">Poster</span> — 103º RAFA, Buenos Aires, Argentina.</div></div>
+      <div class="list-row"><div class="yr">2018</div><div>Linking localization effects on the dynamic behavior of many-spin systems with quantum irreversibility. <span class="kind">Poster</span> — Summer School on Collective Behaviour in Quantum Matter, Trieste, Italy.</div></div>
+      <div class="list-row"><div class="yr">2017</div><div>Analysis of the movement and electrical properties of cells grown in vitro using a new measurement technique with lock-in amplifiers. <span class="kind">Poster</span> — 102º RAFA, La Plata, Argentina.</div></div>
+
+      <details class="courses">
+        <summary>Postgraduate courses (16)</summary>
+        <div class="course-grid">
+          <div><span class="yr">2023</span>School on Quantum Many-Body Phenomena out of Equilibrium — ICTP, Trieste</div>
+          <div><span class="yr">2023</span>Conference and Advanced School on Low-Dimensional Quantum Systems — ICTP, Chile</div>
+          <div><span class="yr">2022</span>Probability and Stochastic Processes — FaMAF</div>
+          <div><span class="yr">2022</span>Computational Physics — FaMAF</div>
+          <div><span class="yr">2020</span>Molecular Electronics — FaMAF</div>
+          <div><span class="yr">2019</span>Introduction to University Teaching — FaMAF</div>
+          <div><span class="yr">2019</span>XXI Giambiagi Winter School — Buenos Aires</div>
+          <div><span class="yr">2019</span>Signal Hyperpolarization &amp; Preservation in NMR — FaMAF-UNC</div>
+          <div><span class="yr">2019</span>Quantum Field Theory in Solids — FaMAF-UNC</div>
+          <div><span class="yr">2018</span>Solid State I — Instituto Balseiro</div>
+          <div><span class="yr">2018</span>Summer School on Collective Behaviour in Quantum Matter — ICTP</div>
+          <div><span class="yr">2018</span>Neuronal Networks — Instituto Balseiro</div>
+          <div><span class="yr">2018</span>Phase Transitions — Instituto Balseiro</div>
+          <div><span class="yr">2018</span>Materials Characterisation — Instituto Balseiro</div>
+          <div><span class="yr">2017</span>Disorder — Instituto Balseiro</div>
+          <div><span class="yr">2017</span>Phenomenology in Condensed Matter — Instituto Balseiro</div>
+        </div>
+      </details>
+    </section>
+
+    <section id="awards" class="awards">
+      <h2 class="section-title">Awards &amp; Recognition</h2>
+      <div class="list-row"><div class="yr">2022</div><div>Special prize for the best introduction of the papers in <a href="https://doi.org/10.1088/1361-648X/ac6e1c" target="_blank" rel="noopener">"Special issue: the physics of electrocatalysis"</a>.</div></div>
+      <div class="list-row"><div class="yr">2017</div><div>Highest overall score of the 61st promotion of Licenciados en Física, Instituto Balseiro.</div></div>
+    </section>
+
+    <footer>
+      Fabricio S. Lozano Negro — Cordoba, Argentina · <a href="mailto:fabricio.s.lozano@gmail.com">fabricio.s.lozano@gmail.com</a>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+  // Scrollspy: highlight active section in the sidebar nav
+  const links = document.querySelectorAll('#toc a');
+  const sections = [...links].map(a => document.querySelector(a.getAttribute('href')));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = '#' + entry.target.id;
+      const link = document.querySelector(`#toc a[href="${id}"]`);
+      if (!link) return;
+      if (entry.isIntersecting){
+        links.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+  sections.forEach(s => s && observer.observe(s));
+</script>
+
+</body>
+</html>
